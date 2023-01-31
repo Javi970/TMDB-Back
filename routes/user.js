@@ -32,7 +32,6 @@ router.post('/login', (req, res) => {
         id: user.id,
         email: user.email,
         name: user.name,
-        /* id: user.id, */
       }
       const token = generateToken(payload)
       res.send([payload, token])
@@ -40,14 +39,14 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.post('/me', validateUser, (req, res) => {
+router.get('/me', validateUser, (req, res) => {
   res.send(req.user)
 })
 
 //ruta para desloguearse
-router.post('/logOut', (req, res) => {
-  res.clearCookie('token')
+/* router.post('/logOut', (req, res) => {
+  res.clearCookie('token', { path: '/' })
   res.sendStatus(204)
-})
+}) */
 
 module.exports = router
